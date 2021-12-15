@@ -16,7 +16,7 @@ const Counter = () => {
     dispatch(counterSlice.actions.decrement());
   };
   const increaseByFive = () => {
-    dispatch(counterSlice.actions.increase(10));
+    dispatch(counterSlice.actions.increase(5));
   };
   const toggleCounterHandler = () => {
     dispatch(counterSlice.actions.toggleCounter());
