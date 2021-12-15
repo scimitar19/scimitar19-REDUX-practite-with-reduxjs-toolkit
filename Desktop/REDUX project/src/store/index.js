@@ -1,29 +1,15 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import Counter from "./counter-store.js";
+import userAuthentication from "./authenticate-store.js";
 
-function reducerFunction(state, action) {
-  if (action.type === "increment") {
-    return { count: state.count + 1, toggleCounter: state.toggleCounter };
-  }
-  if (action.type === "decrement") {
-    return { count: state.count - 1, toggleCounter: state.toggleCounter };
-  }
-  if (action.type === "increase-by-five") {
-    return {
-      count: state.count + action.payload,
-      toggleCounter: state.toggleCounter,
-    };
-  }
+export const counterSlice = Counter();
+export const authenticateSlice = userAuthentication();
 
-  if (action.type === "toggle") {
-    console.log(state.toggleCounter);
-    if (state.toggleCounter === false) {
-      return { count: state.count, toggleCounter: true };
-    }
-    return { count: state.count, toggleCounter: action.payload };
-  }
-  return state;
-}
-
-const Store = createStore(reducerFunction, { count: 0, toggleCounter: true });
+const Store = configureStore({
+  reducer: {
+    counter: counterSlice.reducer,
+    authentication: authenticateSlice.reducer,
+  },
+});
 
 export default Store;

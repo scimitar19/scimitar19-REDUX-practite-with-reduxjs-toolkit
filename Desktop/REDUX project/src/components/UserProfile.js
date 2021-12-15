@@ -1,10 +1,17 @@
-import classes from './UserProfile.module.css';
+import classes from "./UserProfile.module.css";
+import { useSelector } from "react-redux";
 
 const UserProfile = () => {
+  const toggleUserProfile = useSelector(
+    (state) => state.authentication.userAuth
+  );
+
   return (
-    <main className={classes.profile}>
-      <h2>My User Profile</h2>
-    </main>
+    toggleUserProfile && (
+      <main className={classes.profile}>
+        <h2>My User Profile</h2>
+      </main>
+    )
   );
 };
 
